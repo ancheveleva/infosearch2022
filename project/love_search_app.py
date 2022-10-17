@@ -35,9 +35,7 @@ query = st.text_input('Введите запрос')
 left_col, right_col = st.columns(2)
 model_type = left_col.selectbox('Выберите метод векторизации', ['TF-IDF', 'BM25', 'BERT'])
 if st.button('Поиск'):
-    start = time.time()
-    search_results = main(corpus_dir=args.corpus, query=query, model_type=model_type)
-    end = time.time()
-    st.markdown(f'*Время поиска: {round(end - start, 3)} секунд*')
+    search_results, search_time = main(corpus_dir=args.corpus, query=query, model_type=model_type)
+    st.markdown(f'*Время поиска: {round(search_time, 3)} секунд*')
     for res in search_results:
         st.markdown(f'* {res}')
